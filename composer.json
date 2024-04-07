@@ -1,0 +1,16 @@
+{
+  "name": "danielg/todo",
+  "description": "A simple todo application, decoupled from infrastructure",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "DanielG",
+      "email": "danielgsoftware@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "qossmic/deptrac-shim": "^1.0",
+    "behat/behat": "^3.14"
+  }
+}
