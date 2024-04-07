@@ -1,0 +1,30 @@
+deptrac:
+  paths:
+    - ./
+
+  layers:
+    - name: Domain
+      collectors:
+        - type: className
+          regex: .*\\Domain\\.*
+
+    - name: Application
+      collectors:
+        - type: className
+          regex: .*\\Application\\.*
+
+    - name: Infrastructure
+      collectors:
+        - type: className
+          regex: .*\\Infrastructure\\.*
+
+  ruleset:
+    Infrastructure:
+      - Application
+      - Domain
+
+    Application:
+      - Domain
+
+    Domain:
+      # nothing
