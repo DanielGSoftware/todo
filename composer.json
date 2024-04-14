@@ -9,8 +9,28 @@
       "email": "danielgsoftware@gmail.com"
     }
   ],
+  "autoload": {
+    "classmap": [
+      "src/"
+    ],
+    "files": [
+      "helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4" : {
+      "Tests\\": "Tests"
+    }
+  },
   "require-dev": {
     "qossmic/deptrac-shim": "^1.0",
-    "behat/behat": "^3.14"
+    "friendsofphp/php-cs-fixer": "^3.53",
+    "phpunit/phpunit": "^11.1",
+    "phpstan/phpstan": "^1.10"
+  },
+  "require": {
+    "beberlei/assert": "^3.3",
+    "symfony/console": "^7.0",
+    "ext-pdo": "*"
   }
 }
