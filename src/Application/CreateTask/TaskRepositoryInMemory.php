@@ -13,7 +13,7 @@ class TaskRepositoryInMemory implements TaskRepository
 
     public function nextId(): int
     {
-        if(! $this->tasks) {
+        if(empty($this->tasks)) {
             return 1;
         }
 

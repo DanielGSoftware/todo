@@ -11,7 +11,6 @@ class CreateTaskTest extends TestCase
 {
     public function test_a_task_can_be_created_through_the_command_line(): void
     {
-        // Arrange
         $createTaskServiceMock = $this->createMock(TaskService::class);
         $createTaskServiceMock
             ->expects($this->once())
@@ -21,7 +20,6 @@ class CreateTaskTest extends TestCase
         $command = new CreateTask($createTaskServiceMock);
         $commandTester = new CommandTester($command);
 
-        // Act
         $response = $commandTester->execute([
             'title' => 'Foo'
         ]);

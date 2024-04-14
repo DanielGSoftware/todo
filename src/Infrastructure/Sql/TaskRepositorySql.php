@@ -36,7 +36,11 @@ final readonly class TaskRepositorySql implements TaskRepository
         $statement = $this->pdo->prepare('select max(id) from tasks');
         $statement->execute();
 
-        return $statement->fetchColumn(0) + 1;
+        if(empty($statement->fetchColumn())) {
+            return 1;
+        }
+
+        return $statement->fetchColumn() + 1;
     }
 
     public function save(Task $task): void
