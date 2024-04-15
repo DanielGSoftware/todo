@@ -30,11 +30,11 @@ class CreateTask extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Task created!');
-
         $this->createTaskService->create(
             $input->getArgument('title')
         );
+
+        $output->writeln('Task created!');
 
         return Command::SUCCESS;
     }
