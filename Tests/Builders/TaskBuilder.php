@@ -2,7 +2,7 @@
 
 namespace Tests\Builders;
 
-use Domain\Model\Task\Task;
+use Domain\Model\Task\TaskWrite;
 
 final class TaskBuilder
 {
@@ -33,9 +33,9 @@ final class TaskBuilder
         return $this;
     }
 
-    public function build(): Task
+    public function build(): TaskWrite
     {
-        return new Task(
+        return new TaskWrite(
             id: $this->id,
             title: $this->title,
             completed: $this->completed,

@@ -4,7 +4,7 @@ namespace Domain\Model\Task;
 
 use Assert\Assert;
 
-final readonly class Task
+final readonly class TaskRead
 {
     public function __construct(
         private int $id,

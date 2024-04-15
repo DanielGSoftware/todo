@@ -4,9 +4,11 @@ namespace Domain\Model\Task;
 
 interface TaskRepository
 {
-    public function getById(int $id): ?Task;
-
     public function nextId(): int;
 
-    public function save(Task $task): void;
+    public function getWriteModelById(int $id): ?TaskWrite;
+
+    public function getReadModelById(int $id): ?TaskRead;
+
+    public function save(TaskWrite $task): void;
 }

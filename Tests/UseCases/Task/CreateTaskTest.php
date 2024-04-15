@@ -15,7 +15,7 @@ class CreateTaskTest extends TestCase
 
         $orderId = $createTaskService->create('FooTitle');
 
-        $task = $taskRepository->getById($orderId);
+        $task = $taskRepository->getReadModelById($orderId);
         self::assertEquals('FooTitle', $task->title());
     }
 }

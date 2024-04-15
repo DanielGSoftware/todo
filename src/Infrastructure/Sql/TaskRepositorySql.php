@@ -2,7 +2,8 @@
 
 namespace Infrastructure\Sql;
 
-use Domain\Model\Task\Task;
+use Domain\Model\Task\TaskRead;
+use Domain\Model\Task\TaskWrite;
 use Domain\Model\Task\TaskRepository;
 use PDO;
 
@@ -12,7 +13,17 @@ final readonly class TaskRepositorySql implements TaskRepository
     {
     }
 
-    public function getById(int $id): ?Task
+    public function nextId(): int
+    {
+        $statement = $this->pdo->prepare('select max(id) from tasks');
+        $statement->execute();
+
+        $id = $statement->fetchColumn();
+
+        return ! $id ? 1 : $id + 1;
+    }
+
+    public function getWriteModelById(int $id): ?TaskWrite
     {
         $statement = $this->pdo->prepare('SELECT * FROM tasks WHERE id = :id');
 
@@ -24,33 +35,32 @@ final readonly class TaskRepositorySql implements TaskRepository
             return null;
         }
 
-        return new Task(
+        return new TaskWrite(
             $task['id'],
             $task['title'],
             $task['completed']
         );
     }
 
-    public function nextId(): int
+    public function getReadModelById(int $id): ?TaskRead
     {
-        $statement = $this->pdo->prepare('select max(id) from tasks');
-        $statement->execute();
+        $task = $this->getWriteModelById($id);
 
-        if(empty($statement->fetchColumn())) {
-            return 1;
-        }
-
-        return $statement->fetchColumn() + 1;
+        return $task ? new TaskRead(
+            $task->id,
+            $task->title,
+            $task->completed
+        ) : null;
     }
 
-    public function save(Task $task): void
+    public function save(TaskWrite $task): void
     {
         $statement = $this->pdo->prepare('INSERT INTO tasks (id, title, completed) VALUES (:id, :title, :completed)');
 
         $statement->execute([
-            ':id' => $task->id(),
-            ':title' => $task->title(),
-            ':completed' => (int) $task->isCompleted(),
+            ':id' => $task->id,
+            ':title' => $task->title,
+            ':completed' => (int) $task->completed
         ]);
     }
 }

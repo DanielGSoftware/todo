@@ -6,11 +6,6 @@ class TaskRepositoryInMemory implements TaskRepository
 {
     private array $tasks = [];
 
-    public function getById(int $id): ?Task
-    {
-        return $this->tasks[$id] ?? null;
-    }
-
     public function nextId(): int
     {
         if(empty($this->tasks)) {
@@ -20,8 +15,24 @@ class TaskRepositoryInMemory implements TaskRepository
         return max(array_keys($this->tasks)) + 1;
     }
 
-    public function save(Task $task): void
+    public function getWriteModelById(int $id): ?TaskWrite
     {
-        $this->tasks[$task->id()] = $task;
+        return $this->tasks[$id] ?? null;
+    }
+
+    public function getReadModelById(int $id): ?TaskRead
+    {
+        $task = $this->getWriteModelById($id);
+
+        return $task ? new TaskRead(
+            $task->id,
+            $task->title,
+            $task->completed
+        ) : null;
+    }
+
+    public function save(TaskWrite $task): void
+    {
+        $this->tasks[$task->id] = $task;
     }
 }

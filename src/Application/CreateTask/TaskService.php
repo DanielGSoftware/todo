@@ -2,7 +2,7 @@
 
 namespace Application\Task;
 
-use Domain\Model\Task\Task;
+use Domain\Model\Task\TaskWrite;
 use Domain\Model\Task\TaskRepository;
 
 class TaskService
@@ -17,7 +17,7 @@ class TaskService
     ): int {
         $taskId = $this->taskRepository->nextId();
 
-        $task = new Task(
+        $task = new TaskWrite(
             id: $taskId,
             title: $title,
             completed: false,
