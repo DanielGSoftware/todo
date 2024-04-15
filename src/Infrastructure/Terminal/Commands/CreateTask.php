@@ -15,8 +15,6 @@ class CreateTask extends Command
         ?string $name = null
     ) {
         parent::__construct($name);
-
-
     }
 
     protected function configure(): void
