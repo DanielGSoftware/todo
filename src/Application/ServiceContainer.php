@@ -4,20 +4,23 @@ namespace Application;
 
 use Application\Task\TaskService;
 use Domain\Model\Task\TaskRepository;
+use Domain\Model\Task\TaskRepositoryInMemory;
+use Infrastructure\Terminal\Commands\CreateTask;
 
 abstract class ServiceContainer
 {
-    protected ?TaskRepository $taskRepository = null;
-    protected ?TaskService $taskService = null;
-
-    abstract public function taskRepository(): TaskRepository;
+    public function taskRepository(): TaskRepository
+    {
+        return new TaskRepositoryInMemory();
+    }
 
     public function taskService(): TaskService
     {
-        if (! $this->taskService) {
-            $this->taskService = new TaskService($this->taskRepository());
-        }
+        return new TaskService($this->taskRepository());
+    }
 
-        return $this->taskService;
+    public function taskCliCommand(): CreateTask
+    {
+        return new CreateTask($this->taskService());
     }
 }
