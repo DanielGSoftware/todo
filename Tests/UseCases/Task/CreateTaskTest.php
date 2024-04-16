@@ -6,17 +6,18 @@ use Application\Task\TaskService;
 use Domain\Model\Task\TaskRead;
 use Domain\Model\Task\TaskRepositoryInMemory;
 use PHPUnit\Framework\TestCase;
+use Tests\BaseTestCase;
 
-class CreateTaskTest extends TestCase
+class CreateTaskTest extends BaseTestCase
 {
     public function test_it_creates_a_task(): void
     {
-        $taskRepository = new TaskRepositoryInMemory();
-        $createTaskService = new TaskService($taskRepository);
+        $orderId = $this
+            ->container
+            ->taskService()
+            ->create('FooTitle');
 
-        $orderId = $createTaskService->create('FooTitle');
-
-        $task = $taskRepository->getReadModelById($orderId);
+        $task = $this->container->taskRepository()->getReadModelById($orderId);
         self::assertInstanceOf(TaskRead::class, $task);
         self::assertEquals('FooTitle', $task->title());
     }

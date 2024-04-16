@@ -9,9 +9,15 @@ use Infrastructure\Terminal\Commands\CreateTask;
 
 abstract class ServiceContainer
 {
+    protected ?TaskRepository $taskRepository = null;
+
     public function taskRepository(): TaskRepository
     {
-        return new TaskRepositoryInMemory();
+        if(! $this->taskRepository) {
+            $this->taskRepository = new TaskRepositoryInMemory();
+        }
+
+        return $this->taskRepository;
     }
 
     public function taskService(): TaskService

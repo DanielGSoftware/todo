@@ -2,10 +2,7 @@
 
 namespace Tests\Adapters\Incoming;
 
-use Application\Task\TaskService;
 use Domain\Model\Task\TaskRead;
-use Infrastructure\Terminal\Commands\CreateTask;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\BaseTestCase;
 
