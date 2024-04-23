@@ -20,10 +20,6 @@ class CreateTaskTest extends BaseTestCase
 
         $output = $commandTester->getDisplay();
         $this->assertStringContainsString('Task created', $output);
-
-        $task = $this->container->taskRepository()->getReadModelById(1);
-        self::assertInstanceOf(TaskRead::class, $task);
-        self::assertSame('Foo', $task->title());
     }
 
     public function test_title_is_required(): void

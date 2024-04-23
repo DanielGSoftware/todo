@@ -15,24 +15,13 @@ class TaskRepositoryInMemory implements TaskRepository
         return max(array_keys($this->tasks)) + 1;
     }
 
-    public function getWriteModelById(int $id): ?TaskWrite
+    public function getById(int $id): ?TaskWrite
     {
         return $this->tasks[$id] ?? null;
     }
 
-    public function getReadModelById(int $id): ?TaskRead
-    {
-        $task = $this->getWriteModelById($id);
-
-        return $task ? new TaskRead(
-            $task->id,
-            $task->title,
-            $task->completed
-        ) : null;
-    }
-
     public function save(TaskWrite $task): void
     {
-        $this->tasks[$task->id] = $task;
+        $this->tasks[$task->id()] = $task;
     }
 }

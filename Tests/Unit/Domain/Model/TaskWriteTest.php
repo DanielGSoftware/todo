@@ -11,6 +11,6 @@ class TaskWriteTest extends TestCase
     {
         $this->expectExceptionMessage("Title can't be an empty string");
 
-        new TaskWrite(1, '', false);
+        TaskWrite::new(1, '');
     }
 }

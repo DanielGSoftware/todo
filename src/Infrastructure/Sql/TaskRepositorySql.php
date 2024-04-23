@@ -23,7 +23,7 @@ final readonly class TaskRepositorySql implements TaskRepository
         return ! $id ? 1 : $id + 1;
     }
 
-    public function getWriteModelById(int $id): ?TaskWrite
+    public function getById(int $id): ?TaskWrite
     {
         $statement = $this->pdo->prepare('SELECT * FROM tasks WHERE id = :id');
 
@@ -35,22 +35,10 @@ final readonly class TaskRepositorySql implements TaskRepository
             return null;
         }
 
-        return new TaskWrite(
+        return TaskWrite::new(
             $task['id'],
             $task['title'],
-            $task['completed']
         );
-    }
-
-    public function getReadModelById(int $id): ?TaskRead
-    {
-        $task = $this->getWriteModelById($id);
-
-        return $task ? new TaskRead(
-            $task->id,
-            $task->title,
-            $task->completed
-        ) : null;
     }
 
     public function save(TaskWrite $task): void
@@ -58,9 +46,9 @@ final readonly class TaskRepositorySql implements TaskRepository
         $statement = $this->pdo->prepare('INSERT INTO tasks (id, title, completed) VALUES (:id, :title, :completed)');
 
         $statement->execute([
-            ':id' => $task->id,
-            ':title' => $task->title,
-            ':completed' => (int) $task->completed
+            ':id' => $task->id(),
+            ':title' => $task->title(),
+            ':completed' => (int) $task->isCompleted()
         ]);
     }
 }

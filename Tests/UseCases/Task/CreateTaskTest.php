@@ -5,7 +5,7 @@ namespace Tests\UseCases\Task;
 use Application\Task\TaskService;
 use Domain\Model\Task\TaskRead;
 use Domain\Model\Task\TaskRepositoryInMemory;
-use PHPUnit\Framework\TestCase;
+use Domain\Model\Task\TaskWrite;
 use Tests\BaseTestCase;
 
 class CreateTaskTest extends BaseTestCase
@@ -17,8 +17,8 @@ class CreateTaskTest extends BaseTestCase
             ->taskService()
             ->create('FooTitle');
 
-        $task = $this->container->taskRepository()->getReadModelById($orderId);
-        self::assertInstanceOf(TaskRead::class, $task);
+        $task = $this->container->taskRepository()->getById($orderId);
+        self::assertInstanceOf(TaskWrite::class, $task);
         self::assertEquals('FooTitle', $task->title());
     }
 }

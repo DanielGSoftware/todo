@@ -17,10 +17,9 @@ class TaskService
     ): int {
         $taskId = $this->taskRepository->nextId();
 
-        $task = new TaskWrite(
+        $task = TaskWrite::new(
             id: $taskId,
             title: $title,
-            completed: false,
         );
 
         $this->taskRepository->save($task);

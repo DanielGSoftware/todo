@@ -35,10 +35,9 @@ final class TaskBuilder
 
     public function build(): TaskWrite
     {
-        return new TaskWrite(
+        return TaskWrite::new(
             id: $this->id,
             title: $this->title,
-            completed: $this->completed,
         );
     }
 }
