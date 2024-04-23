@@ -1,6 +1,6 @@
 deptrac:
   paths:
-    - ./
+    - ./src
 
   layers:
     - name: Domain
