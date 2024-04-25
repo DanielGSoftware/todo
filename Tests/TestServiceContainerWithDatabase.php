@@ -3,7 +3,9 @@
 namespace Tests;
 
 use Application\ServiceContainer;
+use Application\Tasks\List\TaskReadRepository;
 use Domain\Model\Task\TaskWriteRepository;
+use Infrastructure\Sql\TaskReadRepositorySql;
 use Infrastructure\Sql\TaskWriteRepositorySql;
 use PDO;
 
@@ -14,6 +16,11 @@ class TestServiceContainerWithDatabase extends ServiceContainer
     public function taskWriteRepository(): TaskWriteRepository
     {
         return new TaskWriteRepositorySql($this->pdo());
+    }
+
+    public function taskReadRepository(): TaskReadRepository
+    {
+        return new TaskReadRepositorySql($this->pdo);
     }
 
     public function pdo(): PDO

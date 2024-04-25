@@ -8,19 +8,8 @@ final readonly class RetrieveTasksService
     {
     }
 
-    /**
-     * @return TaskRead[]
-     */
     public function listAll(): array
     {
-        $taskRecords = $this->taskReadRepository->listAll();
-
-        $taskReads = [];
-
-        foreach ($taskRecords as $task) {
-            $taskReads[] = TaskRead::reconstitute($task);
-        }
-
-        return $taskReads;
+        return $this->taskReadRepository->listAll();
     }
 }

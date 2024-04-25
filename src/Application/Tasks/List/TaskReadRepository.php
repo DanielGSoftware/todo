@@ -5,12 +5,7 @@ namespace Application\Tasks\List;
 interface TaskReadRepository
 {
     /**
-     * @return array<array{
-     *       id: int|string,
-     *       title: string,
-     *       description: string,
-     *       completed: bool|int
-     *  }>
+     * @return TaskRead[]
      */
     public function listAll(): array;
 }

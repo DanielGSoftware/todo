@@ -8,7 +8,6 @@ final class TaskBuilder
 {
     private int $id = 1;
     private string $title = 'FooTitle';
-    private bool $completed = false;
 
     private function __construct()
     {
@@ -22,13 +21,6 @@ final class TaskBuilder
     public function withTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function completed(bool $completed = true): self
-    {
-        $this->completed = $completed;
 
         return $this;
     }

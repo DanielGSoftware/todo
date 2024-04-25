@@ -7,7 +7,6 @@ final readonly class TaskRead
     private function __construct(
         public int $id,
         public string $title,
-        public string $description,
         public bool $completed,
     ) {
     }
@@ -16,7 +15,6 @@ final readonly class TaskRead
      * @param array{
      *      id: int|string,
      *      title: string,
-     *      description: string,
      *      completed: bool|int
      *  } $task
      */
@@ -25,7 +23,6 @@ final readonly class TaskRead
         return new self(
             $task['id'],
             $task['title'],
-            $task['description'],
             (bool) $task['completed'],
         );
     }

@@ -2,6 +2,7 @@
 
 namespace Infrastructure\Sql;
 
+use Application\Tasks\List\TaskRead;
 use Application\Tasks\List\TaskReadRepository;
 use PDO;
 
@@ -16,6 +17,13 @@ class TaskReadRepositorySql implements TaskReadRepository
         $statement = $this->pdo->prepare('select * from tasks');
         $statement->execute();
 
-        return $statement->fetchColumn('*');
+        $records =  $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $tasks = [];
+        foreach ($records as $record) {
+            $tasks[] = TaskRead::reconstitute($record);
+        }
+
+        return $tasks;
     }
 }

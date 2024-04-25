@@ -2,7 +2,6 @@
 
 namespace Tests\Adapters\Incoming;
 
-use Domain\Model\Task\TaskRead;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\BaseTestCase;
 
