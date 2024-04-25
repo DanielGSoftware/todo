@@ -2,7 +2,7 @@
 
 namespace Domain\Model\Task;
 
-interface TaskRepository
+interface TaskWriteRepository
 {
     public function nextId(): int;
 

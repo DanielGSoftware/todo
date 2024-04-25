@@ -10,7 +10,7 @@ class CreateTaskTest extends BaseTestCase
 {
     public function test_a_task_can_be_created_through_the_command_line(): void
     {
-        $command = $this->container->taskCliCommand();
+        $command = $this->container->createTaskCommand();
         $commandTester = new CommandTester($command);
 
         $commandTester->execute([
@@ -26,7 +26,7 @@ class CreateTaskTest extends BaseTestCase
     {
         $this->expectExceptionMessage('missing: "title"');
 
-        $command = $this->container->taskCliCommand();
+        $command = $this->container->createTaskCommand();
         $commandTester = new CommandTester($command);
 
         $commandTester->execute([]);

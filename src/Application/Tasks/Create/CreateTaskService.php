@@ -1,14 +1,14 @@
 <?php
 
-namespace Application\Task;
+namespace Application\Tasks\CreateTask;
 
+use Domain\Model\Task\TaskWriteRepository;
 use Domain\Model\Task\TaskWrite;
-use Domain\Model\Task\TaskRepository;
 
-class TaskService
+class CreateTaskService
 {
     public function __construct(
-        private readonly TaskRepository $taskRepository,
+        private readonly TaskWriteRepository $taskRepository,
     ) {
     }
 

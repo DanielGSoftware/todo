@@ -4,12 +4,12 @@ namespace Tests\Adapters\Outgoing\Task;
 
 use Domain\Model\Task\TaskRead;
 use Domain\Model\Task\TaskWrite;
-use Domain\Model\Task\TaskRepository;
+use Domain\Model\Task\TaskWriteRepository;
 use PHPUnit\Framework\TestCase;
 
 abstract class TaskRepositoryTestCase extends TestCase
 {
-    abstract protected function getRepository(): TaskRepository;
+    abstract protected function getRepository(): TaskWriteRepository;
 
     public function test_it_can_store_and_find_a_write_task_by_id(): void
     {

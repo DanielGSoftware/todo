@@ -2,13 +2,13 @@
 
 namespace Tests\Adapters\Outgoing\Task;
 
-use Domain\Model\Task\TaskRepository;
-use Domain\Model\Task\TaskRepositoryInMemory;
+use Application\Tasks\CreateTask\TaskWriteRepositoryInMemory;
+use Domain\Model\Task\TaskWriteRepository;
 
 class TaskRepositoryInMemoryTest extends TaskRepositoryTestCase
 {
-    protected function getRepository(): TaskRepository
+    protected function getRepository(): TaskWriteRepository
     {
-        return new TaskRepositoryInMemory();
+        return new TaskWriteRepositoryInMemory();
     }
 }

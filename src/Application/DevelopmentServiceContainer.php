@@ -2,17 +2,24 @@
 
 namespace Application;
 
-use Domain\Model\Task\TaskRepository;
-use Infrastructure\Sql\TaskRepositorySql;
+use Application\Tasks\List\TaskReadRepository;
+use Domain\Model\Task\TaskWriteRepository;
+use Infrastructure\Sql\TaskReadRepositorySql;
+use Infrastructure\Sql\TaskWriteRepositorySql;
 use PDO;
 
 class DevelopmentServiceContainer extends ServiceContainer
 {
     protected ?PDO $pdo = null;
 
-    public function taskRepository(): TaskRepository
+    public function taskWriteRepository(): TaskWriteRepository
     {
-        return new TaskRepositorySql($this->pdo());
+        return new TaskWriteRepositorySql($this->pdo());
+    }
+
+    public function taskReadRepository(): TaskReadRepository
+    {
+        return new TaskReadRepositorySql($this->pdo());
     }
 
     public function pdo(): PDO
