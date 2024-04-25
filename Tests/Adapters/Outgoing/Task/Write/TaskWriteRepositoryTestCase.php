@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests\Adapters\Outgoing\Task;
+namespace Tests\Adapters\Outgoing\Task\Write;
 
-use Domain\Model\Task\TaskRead;
 use Domain\Model\Task\TaskWrite;
 use Domain\Model\Task\TaskWriteRepository;
 use PHPUnit\Framework\TestCase;
 
-abstract class TaskRepositoryTestCase extends TestCase
+abstract class TaskWriteRepositoryTestCase extends TestCase
 {
     abstract protected function getRepository(): TaskWriteRepository;
 

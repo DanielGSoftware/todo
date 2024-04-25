@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Adapters\Outgoing\Task;
+namespace Tests\Adapters\Outgoing\Task\Write;
 
 use Domain\Model\Task\TaskWriteRepository;
 use Tests\TestServiceContainerWithDatabase;
 
-class TaskRepositorySqlTest extends TaskRepositoryTestCase
+class TaskWriteWriteRepositorySqlTest extends TaskWriteRepositoryTestCase
 {
     protected TestServiceContainerWithDatabase $serviceContainer;
 
