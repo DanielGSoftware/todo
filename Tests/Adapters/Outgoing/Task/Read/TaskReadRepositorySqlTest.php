@@ -2,6 +2,7 @@
 
 namespace Tests\Adapters\Outgoing\Task\Read;
 
+use Application\Tasks\List\TaskRead;
 use Tests\BaseTestCase;
 use Tests\Builders\TaskBuilder;
 use Tests\TestServiceContainerWithDatabase;
@@ -21,7 +22,9 @@ class TaskReadRepositorySqlTest extends BaseTestCase
 
     public function test_lists_all_tasks(): void
     {
-        $task = TaskBuilder::create()->build();
+        $task = TaskBuilder::create()
+            ->withTitle('Task 1')
+            ->build();
         $taskWriteRepository = $this->serviceContainer->taskWriteRepository();
         $taskWriteRepository->save($task);
 
@@ -29,5 +32,7 @@ class TaskReadRepositorySqlTest extends BaseTestCase
 
         $task = $tasks[0];
         self::assertCount(1, $tasks);
+        self::assertSame(1, $task->id);
+        self::assertSame('Task 1', $task->title);
     }
 }
