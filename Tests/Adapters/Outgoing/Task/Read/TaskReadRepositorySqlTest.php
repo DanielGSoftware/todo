@@ -31,6 +31,7 @@ class TaskReadRepositorySqlTest extends BaseTestCase
         $tasks = $this->serviceContainer->taskReadRepository()->listAll();
 
         $task = $tasks[0];
+        self::assertTrue($task instanceof TaskRead);
         self::assertCount(1, $tasks);
         self::assertSame(1, $task->id);
         self::assertSame('Task 1', $task->title);
