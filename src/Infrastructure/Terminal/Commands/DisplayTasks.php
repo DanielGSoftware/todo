@@ -31,7 +31,7 @@ class DisplayTasks extends Command
         foreach ($tasks as $task) {
             $output->writeln("Task ID: {$task->id}");
             $output->writeln("Task Title: {$task->title}");
-            $output->writeln("Task Completed: " . ($task->completed ? 'Yes' : 'No'));
+            $output->writeln('Task Completed: ' . ($task->completed ? 'Yes' : 'No'));
             $output->writeln("\n");
         }
 
