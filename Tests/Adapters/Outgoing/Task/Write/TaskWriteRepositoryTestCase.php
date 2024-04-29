@@ -31,6 +31,6 @@ abstract class TaskWriteRepositoryTestCase extends TestCase
     {
         $repository = $this->getRepository();
 
-        self::assertNull($repository->getById(1));
+        self::assertNull($repository->getById(999));
     }
 }

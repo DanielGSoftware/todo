@@ -41,4 +41,11 @@ final class TaskWrite
     {
         return $this->completed;
     }
+
+    public function complete(): self
+    {
+        $this->completed = true;
+
+        return $this;
+    }
 }

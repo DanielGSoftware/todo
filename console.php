@@ -4,6 +4,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Application\DevelopmentServiceContainer;
+use Infrastructure\Terminal\Commands\CompleteTask;
 use Infrastructure\Terminal\Commands\CreateTask;
 use Infrastructure\Terminal\Commands\DisplayTasks;
 use Symfony\Component\Console\Application;
@@ -11,9 +12,8 @@ use Symfony\Component\Console\Application;
 $app = new Application();
 
 $serviceContainer = new DevelopmentServiceContainer();
-$createTaskService = $serviceContainer->createTaskService();
-$retrieveTaskService = $serviceContainer->retrieveTasksService();
 
-$app->add(new CreateTask($createTaskService));
-$app->add(new DisplayTasks($retrieveTaskService));
+$app->add($serviceContainer->createTaskCommand());
+$app->add($serviceContainer->displayTasksCommand());
+$app->add($serviceContainer->completeTaskCommand());
 $app->run();

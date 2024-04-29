@@ -50,4 +50,15 @@ final readonly class TaskWriteRepositorySql implements TaskWriteRepository
             ':completed' => (int) $task->isCompleted()
         ]);
     }
+
+    public function update(TaskWrite $task): void
+    {
+        $statement = $this->pdo->prepare('UPDATE tasks SET title = :title, completed = :completed WHERE id = :id');
+
+        $statement->execute([
+            ':id' => $task->id(),
+            ':title' => $task->title(),
+            ':completed' => (int) $task->isCompleted()
+        ]);
+    }
 }
