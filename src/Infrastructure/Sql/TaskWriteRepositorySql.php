@@ -2,12 +2,11 @@
 
 namespace Infrastructure\Sql;
 
-use Domain\Model\Task\TaskRead;
 use Domain\Model\Task\TaskWrite;
-use Domain\Model\Task\TaskRepository;
+use Domain\Model\Task\TaskWriteRepository;
 use PDO;
 
-final readonly class TaskRepositorySql implements TaskRepository
+final readonly class TaskWriteRepositorySql implements TaskWriteRepository
 {
     public function __construct(private PDO $pdo)
     {

@@ -2,7 +2,7 @@
 
 namespace Infrastructure\Terminal\Commands;
 
-use Application\Task\TaskService;
+use Application\Tasks\CreateTask\CreateTaskService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,8 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateTask extends Command
 {
     public function __construct(
-        private readonly TaskService $createTaskService,
-        ?string $name = null
+        private readonly CreateTaskService $createTaskService,
+        ?string                            $name = null
     ) {
         parent::__construct($name);
     }
@@ -22,8 +22,7 @@ class CreateTask extends Command
         $this->setName('task:create')
             ->setHelp('This command allows you to create a new task.')
             ->setDescription('Create a new task.')
-            ->addArgument('title', InputArgument::REQUIRED, 'The title of the task.')
-        ;
+            ->addArgument('title', InputArgument::REQUIRED, 'The title of the task.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

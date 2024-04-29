@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Adapters\Outgoing\Task;
+namespace Tests\Adapters\Outgoing\Task\Write;
 
-use Domain\Model\Task\TaskRepository;
+use Domain\Model\Task\TaskWriteRepository;
 use Tests\TestServiceContainerWithDatabase;
 
-class TaskRepositorySqlTest extends TaskRepositoryTestCase
+class TaskWriteWriteRepositorySqlTest extends TaskWriteRepositoryTestCase
 {
     protected TestServiceContainerWithDatabase $serviceContainer;
 
@@ -17,8 +17,8 @@ class TaskRepositorySqlTest extends TaskRepositoryTestCase
         $pdo->beginTransaction();
     }
 
-    protected function getRepository(): TaskRepository
+    protected function getRepository(): TaskWriteRepository
     {
-        return $this->serviceContainer->taskRepository();
+        return $this->serviceContainer->taskWriteRepository();
     }
 }

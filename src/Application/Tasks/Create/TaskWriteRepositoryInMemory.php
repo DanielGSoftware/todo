@@ -1,8 +1,11 @@
 <?php
 
-namespace Domain\Model\Task;
+namespace Application\Tasks\CreateTask;
 
-class TaskRepositoryInMemory implements TaskRepository
+use Domain\Model\Task\TaskWrite;
+use Domain\Model\Task\TaskWriteRepository;
+
+class TaskWriteRepositoryInMemory implements TaskWriteRepository
 {
     private array $tasks = [];
 
