@@ -2,8 +2,8 @@
 
 namespace Domain;
 
-use InvalidArgumentException;
+use RuntimeException;
 
-class TaskNotFoundException extends InvalidArgumentException
+class TaskNotFoundException extends RuntimeException
 {
 }

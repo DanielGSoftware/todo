@@ -2,8 +2,6 @@
 
 namespace Tests\Adapters\Incoming;
 
-use Domain\TaskNotFoundException;
-use DomainException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\BaseTestCase;
 use Tests\Builders\TaskBuilder;
