@@ -4,6 +4,8 @@ namespace Infrastructure\Terminal\Commands;
 
 use Application\Tasks\Complete\CompleteTaskService;
 use Application\Tasks\List\RetrieveTasksService;
+use Domain\TaskNotFoundException;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,9 +30,17 @@ class CompleteTask extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->completeTaskService->complete(
-            (int) $input->getArgument('id')
-        );
+        try {
+            $this->completeTaskService->complete(
+                (int) $input->getArgument('id')
+            );
+        } catch (Exception $e) {
+            $output->writeln($e->getMessage());
+
+            return Command::FAILURE;
+        }
+
+        $output->writeln('Task completed!');
 
         return Command::SUCCESS;
     }

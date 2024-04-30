@@ -34,9 +34,10 @@ final readonly class TaskWriteRepositorySql implements TaskWriteRepository
             return null;
         }
 
-        return TaskWrite::new(
+        return TaskWrite::reconstitute(
             $task['id'],
             $task['title'],
+            $task['completed']
         );
     }
 

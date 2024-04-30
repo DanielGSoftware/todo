@@ -2,7 +2,7 @@
 
 namespace Domain\Model\Task;
 
-use Assert\Assert;
+use DomainException;
 
 final class TaskWrite
 {
@@ -13,7 +13,6 @@ final class TaskWrite
     ) {
         assert($id > 0, "Id must be greater than 0");
         assert($title !== "", description: "Title can't be an empty string");
-        assert($completed === false, description: "Can't create a completed task.");
     }
 
     public static function new(
@@ -24,6 +23,18 @@ final class TaskWrite
             id: $id,
             title: $title,
             completed: false
+        );
+    }
+
+    public static function reconstitute(
+        int $id,
+        string $title,
+        bool $completed,
+    ): self {
+        return new self(
+            id: $id,
+            title: $title,
+            completed: $completed
         );
     }
 
@@ -44,6 +55,10 @@ final class TaskWrite
 
     public function complete(): self
     {
+        if($this->completed) {
+            throw new DomainException("Can't complete a task that is already completed.");
+        }
+
         $this->completed = true;
 
         return $this;
