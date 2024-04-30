@@ -35,9 +35,17 @@ final class TaskBuilder
 
     public function build(): TaskWrite
     {
-        return TaskWrite::new(
+        return TaskWrite::reconstitute(
             id: $this->id,
             title: $this->title,
+            completed: $this->completed,
         );
+    }
+
+    public function setId(int $int): self
+    {
+        $this->id = $int;
+
+        return $this;
     }
 }
