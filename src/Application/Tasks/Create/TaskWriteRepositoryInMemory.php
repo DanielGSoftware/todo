@@ -32,4 +32,9 @@ class TaskWriteRepositoryInMemory implements TaskWriteRepository
     {
         $this->tasks[$task->id()] = $task;
     }
+
+    public function delete(int $taskId): void
+    {
+        unset($this->tasks[$taskId]);
+    }
 }

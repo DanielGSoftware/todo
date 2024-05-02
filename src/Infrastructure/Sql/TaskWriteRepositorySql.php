@@ -62,4 +62,11 @@ final readonly class TaskWriteRepositorySql implements TaskWriteRepository
             ':completed' => (int) $task->isCompleted()
         ]);
     }
+
+    public function delete(int $taskId): void
+    {
+        $statement = $this->pdo->prepare('DELETE FROM tasks WHERE id = :id');
+
+        $statement->execute([':id' => $taskId]);
+    }
 }

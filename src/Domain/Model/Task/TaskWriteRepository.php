@@ -11,4 +11,6 @@ interface TaskWriteRepository
     public function save(TaskWrite $task): void;
 
     public function update(TaskWrite $task): void;
+
+    public function delete(int $taskId): void;
 }
