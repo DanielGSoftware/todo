@@ -16,4 +16,5 @@ $serviceContainer = new DevelopmentServiceContainer();
 $app->add($serviceContainer->createTaskCommand());
 $app->add($serviceContainer->displayTasksCommand());
 $app->add($serviceContainer->completeTaskCommand());
+$app->add($serviceContainer->deleteTaskCommand());
 $app->run();

@@ -5,14 +5,14 @@ namespace Application;
 use Application\Tasks\Complete\CompleteTaskService;
 use Application\Tasks\CreateTask\CreateTaskService;
 use Application\Tasks\CreateTask\TaskWriteRepositoryInMemory;
+use Application\Tasks\Delete\DeleteTaskService;
 use Application\Tasks\List\RetrieveTasksService;
-use Application\Tasks\List\TaskRead;
 use Application\Tasks\List\TaskReadRepository;
 use Application\Tasks\List\TaskReadRepositoryInMemory;
 use Domain\Model\Task\TaskWriteRepository;
-use Infrastructure\Sql\TaskReadRepositorySql;
 use Infrastructure\Terminal\Commands\CompleteTask;
 use Infrastructure\Terminal\Commands\CreateTask;
+use InfraStructure\Terminal\Commands\DeleteTaskCommand;
 use Infrastructure\Terminal\Commands\DisplayTasks;
 
 abstract class ServiceContainer
@@ -68,4 +68,13 @@ abstract class ServiceContainer
         return new CompleteTask($this->completeTaskService());
     }
 
+    public function deleteTaskService(): DeleteTaskService
+    {
+        return new DeleteTaskService($this->taskWriteRepository());
+    }
+
+    public function deleteTaskCommand(): DeleteTaskCommand
+    {
+        return new DeleteTaskCommand($this->deleteTaskService());
+    }
 }

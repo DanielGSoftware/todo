@@ -13,4 +13,14 @@ class TaskWriteTest extends TestCase
 
         TaskWrite::new(1, '');
     }
+
+    public function test_cannot_complete_a_completed_task(): void
+    {
+        $this->expectExceptionMessage("Can't complete a task that is already completed.");
+
+        $taskWrite = TaskWrite::reconstitute(1, 'FooTitle', true);
+
+        $taskWrite->complete();
+    }
 }
+
