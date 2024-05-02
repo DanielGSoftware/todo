@@ -34,15 +34,27 @@ final readonly class TaskWriteRepositorySql implements TaskWriteRepository
             return null;
         }
 
-        return TaskWrite::new(
+        return TaskWrite::reconstitute(
             $task['id'],
             $task['title'],
+            $task['completed']
         );
     }
 
     public function save(TaskWrite $task): void
     {
         $statement = $this->pdo->prepare('INSERT INTO tasks (id, title, completed) VALUES (:id, :title, :completed)');
+
+        $statement->execute([
+            ':id' => $task->id(),
+            ':title' => $task->title(),
+            ':completed' => (int) $task->isCompleted()
+        ]);
+    }
+
+    public function update(TaskWrite $task): void
+    {
+        $statement = $this->pdo->prepare('UPDATE tasks SET title = :title, completed = :completed WHERE id = :id');
 
         $statement->execute([
             ':id' => $task->id(),

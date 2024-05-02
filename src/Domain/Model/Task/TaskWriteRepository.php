@@ -9,4 +9,6 @@ interface TaskWriteRepository
     public function getById(int $id): ?TaskWrite;
 
     public function save(TaskWrite $task): void;
+
+    public function update(TaskWrite $task): void;
 }

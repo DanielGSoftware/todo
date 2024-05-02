@@ -27,4 +27,9 @@ class TaskWriteRepositoryInMemory implements TaskWriteRepository
     {
         $this->tasks[$task->id()] = $task;
     }
+
+    public function update(TaskWrite $task): void
+    {
+        $this->tasks[$task->id()] = $task;
+    }
 }

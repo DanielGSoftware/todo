@@ -2,6 +2,7 @@
 
 namespace Application;
 
+use Application\Tasks\Complete\CompleteTaskService;
 use Application\Tasks\CreateTask\CreateTaskService;
 use Application\Tasks\CreateTask\TaskWriteRepositoryInMemory;
 use Application\Tasks\List\RetrieveTasksService;
@@ -10,6 +11,7 @@ use Application\Tasks\List\TaskReadRepository;
 use Application\Tasks\List\TaskReadRepositoryInMemory;
 use Domain\Model\Task\TaskWriteRepository;
 use Infrastructure\Sql\TaskReadRepositorySql;
+use Infrastructure\Terminal\Commands\CompleteTask;
 use Infrastructure\Terminal\Commands\CreateTask;
 use Infrastructure\Terminal\Commands\DisplayTasks;
 
@@ -54,6 +56,16 @@ abstract class ServiceContainer
     public function displayTasksCommand(): DisplayTasks
     {
         return new DisplayTasks($this->retrieveTasksService());
+    }
+
+    public function completeTaskService(): CompleteTaskService
+    {
+        return new CompleteTaskService($this->taskWriteRepository());
+    }
+
+    public function completeTaskCommand(): CompleteTask
+    {
+        return new CompleteTask($this->completeTaskService());
     }
 
 }
