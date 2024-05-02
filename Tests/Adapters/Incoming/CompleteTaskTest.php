@@ -27,6 +27,7 @@ class CompleteTaskTest extends BaseTestCase
 
         $this->commandTester->assertCommandIsSuccessful();
         $this->assertStringContainsString('Task completed!', $this->commandTester->getDisplay());
+        self::assertTrue($this->container->taskWriteRepository()->getById(1)->isCompleted());
     }
 
     public function test_an_id_is_required(): void
