@@ -5,6 +5,7 @@ namespace Tests\Adapters\Outgoing\Task\Write;
 use Domain\Model\Task\TaskWrite;
 use Domain\Model\Task\TaskWriteRepository;
 use PHPUnit\Framework\TestCase;
+use Tests\Builders\TaskBuilder;
 
 abstract class TaskWriteRepositoryTestCase extends TestCase
 {
@@ -32,5 +33,20 @@ abstract class TaskWriteRepositoryTestCase extends TestCase
         $repository = $this->getRepository();
 
         self::assertNull($repository->getById(999));
+    }
+
+    public function test_it_can_delete_a_task(): void
+    {
+        $repository = $this->getRepository();
+        $id = $repository->nextId();
+
+        $writeModel = TaskBuilder::create()
+            ->setId($id)
+            ->build();
+
+        $repository->save($writeModel);
+        $repository->delete($writeModel->id());
+
+        self::assertNull($repository->getById($id));
     }
 }
